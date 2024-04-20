@@ -1,0 +1,24 @@
+#! /bin/sh
+
+case "$1" in
+    start)
+        echo "Loading kernel module scull"
+        scull_load
+        echo "Loading kernel module hello and faulty"
+	module_load hello
+        module_load faulty
+        ;;
+    stop)
+        echo "Unloading kernel module faulty and hello"
+        module_unload faulty
+	module_unload hello
+	echo "Unloading kernel module scull"
+	scull_unload
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+    exit 1
+esac
+
+exit 0
+
